@@ -10,21 +10,7 @@
     <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
     
-    <!-- Icons -->
-    <link rel="preconnect" href="https://unpkg.com">
-    <link rel="preload" as="style" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" media="print" onload="this.media='all'">
-    <link rel="preload" as="style" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" media="print" onload="this.media='all'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-        <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-        <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
-    </noscript>
 
     <style>
         :root {
@@ -588,7 +574,56 @@
 
         <!-- Main Content -->
         <main class="main-content" id="main-content" role="main">
-            <!-- Cards will be populated by JS -->
+            
+            <div class="card" id="card-1">
+                <div class="card-icon" style="background-color: rgba(59, 130, 246, 0.15); color: #3B82F6;">
+                    <i class="ph ph-paint-brush"></i>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Desain Antarmuka</h3>
+                    <p class="card-desc">Mempelajari prinsip dasar pembuatan antarmuka penggun...</p>
+                </div>
+                <button class="icon-btn delete-btn" onclick="deleteCard(1)" aria-label="Hapus Desain Antarmuka">
+                    <i class="ph ph-trash"></i>
+                </button>
+            </div>
+            <div class="card" id="card-2">
+                <div class="card-icon" style="background-color: rgba(16, 185, 129, 0.15); color: #10B981;">
+                    <i class="ph ph-users"></i>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Pengalaman Pengguna</h3>
+                    <p class="card-desc">Fokus pada alur pengguna dan kenyamanan dalam...</p>
+                </div>
+                <button class="icon-btn delete-btn" onclick="deleteCard(2)" aria-label="Hapus Pengalaman Pengguna">
+                    <i class="ph ph-trash"></i>
+                </button>
+            </div>
+            <div class="card" id="card-3">
+                <div class="card-icon" style="background-color: rgba(245, 158, 11, 0.15); color: #F59E0B;">
+                    <i class="ph ph-device-mobile"></i>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Prototyping Interaktif</h3>
+                    <p class="card-desc">Membuat rancangan interaktif sebelum proses pengembanga...</p>
+                </div>
+                <button class="icon-btn delete-btn" onclick="deleteCard(3)" aria-label="Hapus Prototyping Interaktif">
+                    <i class="ph ph-trash"></i>
+                </button>
+            </div>
+            <div class="card" id="card-4">
+                <div class="card-icon" style="background-color: rgba(139, 92, 246, 0.15); color: #8B5CF6;">
+                    <i class="ph ph-wheelchair"></i>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Aksesibilitas Web</h3>
+                    <p class="card-desc">Memastikan aplikasi dapat digunakan oleh semua orang...</p>
+                </div>
+                <button class="icon-btn delete-btn" onclick="deleteCard(4)" aria-label="Hapus Aksesibilitas Web">
+                    <i class="ph ph-trash"></i>
+                </button>
+            </div>
+
         </main>
 
         <!-- Bottom Menu -->
@@ -690,8 +725,7 @@
         }
 
         // Utility to convert hex to rgb for background opacity
-        function hexToRgb(hex) {
-            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        )([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             return result ? 
                 parseInt(result[1], 16) + ', ' + parseInt(result[2], 16) + ', ' + parseInt(result[3], 16) : null;
         }
@@ -715,7 +749,7 @@
             // Permanently delete previously queued item
             if (deletedCardId !== null && deletedCardId !== id) {
                 const prevDeleted = document.getElementById('card-' + deletedCardId);
-                if(prevDeleted) prevDeleted.remove();
+                if(prevDeleted) prevDeleted.style.display = 'none';
             }
 
             deletedCardId = id;
@@ -734,7 +768,7 @@
                 snackbar.classList.remove('show');
                 if(deletedCardId) {
                     const cardEl = document.getElementById('card-' + deletedCardId);
-                    if(cardEl) cardEl.remove();
+                    if(cardEl) cardEl.style.display = 'none';
                     deletedCardId = null;
                 }
             }, 4000); 
@@ -854,7 +888,7 @@
                 document.getElementById('undo-snackbar').classList.remove('show');
                 
                 // Re-render
-                renderCards();
+                document.querySelectorAll('.card').forEach(c => { c.classList.remove('deleting'); c.style.display = 'flex'; });
             }, 800);
         };
 
@@ -880,5 +914,11 @@
         renderCards();
 
     </script>
+
+    <!-- Load CSS at the end to prevent render blocking -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+
 </body>
 </html>
