@@ -684,51 +684,8 @@
     </div>
 
     <script>
-        // Data for Cards
-        const initialCards = [
-            { id: 1, title: 'Desain Antarmuka', desc: 'Mempelajari prinsip dasar pembuatan antarmuka pengguna yang baik.', icon: 'ph-paint-brush', color: '#3B82F6' },
-            { id: 2, title: 'Pengalaman Pengguna', desc: 'Fokus pada alur pengguna dan kenyamanan dalam menggunakan aplikasi.', icon: 'ph-users', color: '#10B981' },
-            { id: 3, title: 'Prototyping Interaktif', desc: 'Membuat rancangan interaktif sebelum proses pengembangan dimulai.', icon: 'ph-device-mobile', color: '#F59E0B' },
-            { id: 4, title: 'Aksesibilitas Web', desc: 'Memastikan aplikasi dapat digunakan oleh semua orang tanpa hambatan.', icon: 'ph-wheelchair', color: '#8B5CF6' },
-        ];
-
         let deletedCardId = null;
         let undoTimeout = null;
-
-        // Render Cards
-        function renderCards() {
-            const mainContent = document.getElementById('main-content');
-            mainContent.innerHTML = ''; 
-            initialCards.forEach(card => {
-                const cardEl = document.createElement('div');
-                cardEl.className = 'card';
-                cardEl.id = 'card-' + card.id;
-                
-                // Color formatting for icons
-                const rgb = hexToRgb(card.color);
-                const bgStyle = 'background-color: rgba(' + rgb + ', 0.15); color: ' + card.color + ';';
-
-                cardEl.innerHTML = `
-                    <div class="card-img" style="${bgStyle}">
-                        <i class="ph ${card.icon}"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">${card.title}</h3>
-                        <p class="card-desc">${card.desc}</p>
-                    </div>
-                    <button class="card-action" aria-label="Hapus ${card.title}" onclick="deleteCard(${card.id})">
-                        <i class="ph ph-trash"></i>
-                    </button>
-                `;
-                mainContent.appendChild(cardEl);
-            });
-        }
-
-        // Utility to convert hex to rgb for background opacity
-        )([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return result ? 
-                parseInt(result[1], 16) + ', ' + parseInt(result[2], 16) + ', ' + parseInt(result[3], 16) : null;
-        }
 
         // Delete Card Logic
         window.deleteCard = function(id) {
